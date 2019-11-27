@@ -1,0 +1,12 @@
+services:
+  - docker
+
+before_install:
+  - docker pull alpine
+
+script:
+  - docker build --no-cache -t graffic/logrotate .
+
+after_success:
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+  - docker push graffic/logrotate
