@@ -7,6 +7,10 @@ before_install:
 script:
   - docker build --no-cache -t graffic/logrotate .
 
-after_success:
-  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
-  - docker push graffic/logrotate
+deploy:
+  provider: script
+  script: bash deploy.sh
+  on:
+    tags: true
+    
+  

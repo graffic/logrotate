@@ -1,10 +1,8 @@
 FROM alpine:3.7
 
 ENV CRON_SCHEDULE='0 * * * *' \
-    LOGROTATE_SIZE='100M' \
-    LOGROTATE_MODE='copytruncate' \
     LOGROTATE_PATTERN='/logs/*.log' \
-    LOGROTATE_ROTATE='0'
+    LOGROTATE_OPTIONS='daily'
 
 RUN apk --no-cache add logrotate tini gettext libintl \
     && mkdir -p /logs \

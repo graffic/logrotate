@@ -6,11 +6,11 @@ services:
     command:
     - /bin/sh
     - -c
-    - >
-      while true;
+    - |
+      while true
       do
-        echo "[`date`] DEBUG blablablablablablablablablablablablablablabla" >> /logs/date.log;
-        sleep 1;
+        echo "[`date`] DEBUG `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1`" >> /logs/date.log
+        sleep 1
       done
     volumes:
     - logs:/logs
@@ -18,8 +18,13 @@ services:
   logrotate:
     build: "."
     environment:
-      CRON_SCHEDULE: '* * * * *'
-      LOGROTATE_SIZE: 5k
+      CRON_SCHEDULE: "* * * * *"
+      LOGROTATE_PATTERN: "/logs/*.log"
+      LOGROTATE_OPTIONS: |-
+        hourly
+        size 5k
+        nocreate
+        dateext
     volumes:
     - logs:/logs
 
