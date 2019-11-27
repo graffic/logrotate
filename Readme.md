@@ -1,5 +1,6 @@
 # Logrotate
-
+[![Build Status](https://img.shields.io/travis/graffic/logrotate?style=flat)](https://travis-ci.org/graffic/logrotate)
+[![Docker Pulls](https://img.shields.io/docker/pulls/graffic/logrotate?style=flat&color=blue)](https://hub.docker.com/r/graffic/logrotate)
 Simple docker container that does logrotate. Designed as sidecar container for Kubernetes pods that
 write logfiles but don't do rotation themselves.
 
