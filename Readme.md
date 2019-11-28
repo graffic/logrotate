@@ -1,6 +1,7 @@
 # Logrotate
 [![Build Status](https://img.shields.io/travis/graffic/logrotate?style=flat)](https://travis-ci.org/graffic/logrotate)
 [![Docker Pulls](https://img.shields.io/docker/pulls/graffic/logrotate?style=flat&color=blue)](https://hub.docker.com/r/graffic/logrotate)
+
 Simple docker container that does logrotate. Designed as sidecar container for Kubernetes pods that
 write logfiles but don't do rotation themselves.
 
@@ -13,18 +14,18 @@ write logfiles but don't do rotation themselves.
 ## Usage
 
 - Use shared volumes to share log files with a container that produces logfiles
-- Set `LOGROTATE_PATTERN` etc. to configure what logrotate watches, log file size, etc.
+- Set `LOGROTATE_PATTERN` etc. to configure what logrotate watches.
+- Optionally set `LOGROTATE_OPTIONS` to modify how logs are rotated. By default `rotate 36500` and `compress` are enabled globally and options contains `daily`.
 - See [docker-compose.yaml](docker-compose.yaml) for a sample app
 
 ### Standalone
 
 ```sh
 docker run -it --rm \
-  --env CRON_SCHEDULE='' \
-  --env LOGROTATE_SIZE=1M \
+  --env CRON_SCHEDULE='* * * * *' \
   --env LOGROTATE_PATTERN=/myapp/logs/*.log \
   -v logs:/myapp/logs
-  quay.io/honestbee/logrotate
+  logrotate
 ```
 
 ### Docker Compose
@@ -43,10 +44,9 @@ Most options below are substituted into the config file for logrotate, so please
 |Option|Default|Description|
 |------|-------|-----------|
 |`CRON_SCHEDULE`|`0 * * * *`|Cron schedule for logrotate command|
-|`LOGROTATE_SIZE`|`100M`|Maximum size of log files|
-|`LOGROTATE_MODE`|`copytruncate`|Mode of log rotation|
 |`LOGROTATE_PATTERN`|`/logs/*.log`|Path pattern of log files to manage|
-|`LOGROTATE_ROTATE`|`0`|Number of old log files to keep|
+|`LOGROTATE_OPTIONS`|`daily`|Multiline configuration options for the pattern given|
+
 
 ## Alternatives
 
