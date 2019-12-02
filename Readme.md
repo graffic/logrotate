@@ -2,8 +2,7 @@
 [![Build Status](https://img.shields.io/travis/graffic/logrotate?style=flat)](https://travis-ci.org/graffic/logrotate)
 [![Docker Pulls](https://img.shields.io/docker/pulls/graffic/logrotate?style=flat&color=blue)](https://hub.docker.com/r/graffic/logrotate)
 
-Simple docker container that does logrotate. Designed as sidecar container for Kubernetes pods that
-write logfiles but don't do rotation themselves.
+Opinionated docker container that does logrotate. Designed as sidecar container for Kubernetes pods or stack containers that write logfiles but don't do rotation themselves.
 
 ## Considerations
 
@@ -15,7 +14,15 @@ write logfiles but don't do rotation themselves.
 
 - Use shared volumes to share log files with a container that produces logfiles
 - Set `LOGROTATE_PATTERN` etc. to configure what logrotate watches.
-- Optionally set `LOGROTATE_OPTIONS` to modify how logs are rotated. By default `rotate 36500` and `compress` are enabled globally and options contains `daily`.
+- Optionally set `LOGROTATE_OPTIONS` to modify how logs are rotated. The global logrotate file contains:
+  ```
+  rotate 36500
+  compress
+  su root root
+  daily
+  nocreate
+  dateext
+  ```
 - See [docker-compose.yaml](docker-compose.yaml) for a sample app
 
 ### Standalone
@@ -45,7 +52,7 @@ Most options below are substituted into the config file for logrotate, so please
 |------|-------|-----------|
 |`CRON_SCHEDULE`|`0 * * * *`|Cron schedule for logrotate command|
 |`LOGROTATE_PATTERN`|`/logs/*.log`|Path pattern of log files to manage|
-|`LOGROTATE_OPTIONS`|`daily`|Multiline configuration options for the pattern given|
+|`LOGROTATE_OPTIONS`| |Multiline configuration options for the pattern given|
 
 
 ## Alternatives

@@ -2,7 +2,7 @@ FROM alpine:3.7
 
 ENV CRON_SCHEDULE='0 * * * *' \
     LOGROTATE_PATTERN='/logs/*.log' \
-    LOGROTATE_OPTIONS='daily'
+    LOGROTATE_OPTIONS=''
 
 RUN apk --no-cache add logrotate tini gettext libintl \
     && mkdir -p /logs \

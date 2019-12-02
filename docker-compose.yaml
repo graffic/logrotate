@@ -20,11 +20,7 @@ services:
     environment:
       CRON_SCHEDULE: "* * * * *"
       LOGROTATE_PATTERN: "/logs/*.log"
-      LOGROTATE_OPTIONS: |-
-        hourly
-        size 5k
-        nocreate
-        dateext
+
     volumes:
     - logs:/logs
 
