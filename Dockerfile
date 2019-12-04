@@ -1,10 +1,10 @@
-FROM alpine:3.7
+FROM alpine:3.10
 
 ENV CRON_SCHEDULE='0 * * * *' \
     LOGROTATE_PATTERN='/logs/*.log' \
     LOGROTATE_OPTIONS=''
 
-RUN apk --no-cache add logrotate tini gettext libintl \
+RUN apk --no-cache add logrotate tini gettext \
     && mkdir -p /logs \
     && mkdir -p /etc/logrotate.d
 

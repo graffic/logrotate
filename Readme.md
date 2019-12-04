@@ -19,9 +19,10 @@ Opinionated docker container that does logrotate. Designed as sidecar container 
   rotate 36500
   compress
   su root root
-  daily
+  size 100M
   nocreate
   dateext
+  dateformat .%Y-%m-%dT%H:%M:%S
   ```
 - See [docker-compose.yaml](docker-compose.yaml) for a sample app
 
@@ -40,7 +41,7 @@ docker run -it --rm \
 - Starts a small sample app that writes a logfile and rotates it:
 
   ```sh
-  docker-compose up
+  docker-compose up --build
   ```
 
 ## Customization
