@@ -1,6 +1,6 @@
 FROM alpine:3.10
 
-ENV CRON_SCHEDULE='0 * * * *' \
+ENV CRON_SCHEDULE='* * * * *' \
     LOGROTATE_PATTERN='/logs/*.log' \
     LOGROTATE_OPTIONS=''
 
