@@ -18,11 +18,13 @@ Opinionated docker container that does logrotate. Designed as sidecar container 
   ```
   rotate 36500
   compress
-  su root root
+  su ${CURRENT_USER} ${CURRENT_USER}
   size 100M
   nocreate
   dateext
-  dateformat .%Y-%m-%dT%H:%M:%S
+  dateformat .%Y-%m-%d-%H-%M-%S
+  olddir archived
+  createolddir 755 ${CURRENT_USER} ${CURRENT_USER}
   ```
 - See [docker-compose.yaml](docker-compose.yaml) for a sample app
 
